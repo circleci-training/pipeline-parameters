@@ -1,0 +1,27 @@
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "current"
+  working-dir:
+    type: string
+    default: "~/main"
+    
+jobs:
+  build:
+    docker:
+      - image: cimg/node:<< pipeline.parameters.image-tag >>
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    working_directory: << pipeline.parameters.working-dir >>
+    steps:
+      - run: echo "The image tag used was << pipeline.parameters.image-tag >>"
+      - run: echo "$(pwd) == << pipeline.parameters.working-dir >>"
+      
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          context: Default
