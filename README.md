@@ -7,3 +7,5 @@ Here's an example:
 ![Passing pipeline parameters](./pipeline-parameters.png)
 
 The Docker login credentials are provided by a context. They could also be included in the Project settings.
+
+You need to set your CircleCI API token as an environment variable.
